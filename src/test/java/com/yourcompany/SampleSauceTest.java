@@ -19,13 +19,10 @@ import io.appium.java_client.ios.IOSDriver;
 
 import java.io.*;
 import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.security.DigestInputStream;
-import java.security.MessageDigest;
 
 /**
  * Simple TestNG test which demonstrates being instantiated via a DataProvider in order to supply multiple browser
@@ -122,7 +119,6 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
      * @param deviceName Represents the device to be tested on
      * @param browserName browser to be used
      * @param deviceOrientation orientation of the device in use.
-     * @param app Represents the location of the app under test.
      * @throws Exception if an error occurs during the running of the test
      */
     @Test(dataProvider = "hardCodedBrowsers")
@@ -213,9 +209,5 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
         }
     }
 
-    /*@BeforeTest
-    private void setTestName(Method method){
-        this.testName.set(method.getName());
-    }*/
 }
 
