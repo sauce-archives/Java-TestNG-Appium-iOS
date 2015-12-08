@@ -10,7 +10,7 @@
 ```export SAUCE_USERNAME=<your_username>```<br>
 ```export SAUCE_ACCESS_KEY=<your_access_key>```<br>
 ```export API_ZIP=<path to your app zip file>```<br>
-Optional:
+Optional:<br>
 ```export BUILD_TAG=<name of your build>```<br>
 
 When using Jenkins the BUILD_TAG is set for you automatically.
