@@ -67,8 +67,8 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
     @DataProvider(name = "hardCodedBrowsers", parallel = true)
     public static Object[][] sauceBrowserDataProvider(Method testMethod) {
         return new Object[][]{
-            new Object[]{"iOS", "iPhone 6", "8.4", "", "portrait", "1.4.16", testMethod.getName()},
-            new Object[]{"iOS", "iPhone 6 Plus", "8.4", "", "portrait", "1.4.16", testMethod.getName()}
+            new Object[]{"iOS", "iPhone 6", "8.4", "", "portrait", "1.4.11", testMethod.getName()},
+            new Object[]{"iOS", "iPhone 6 Plus", "8.4", "", "portrait", "1.4.12", testMethod.getName()}
         };
     }
 
@@ -214,7 +214,7 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
     private static String getSauceURI(){
         //If SC plugin is running in our CI environment this env var will be set.
         String sePort = System.getenv("SELENIUM_PORT");
-        String sauceURI = "@%:%s/wd/hub";
+        String sauceURI = "@%s:%s/wd/hub";
         if (sePort != null){
             sauceURI = String.format(sauceURI, "localhost", sePort);
         } else {
