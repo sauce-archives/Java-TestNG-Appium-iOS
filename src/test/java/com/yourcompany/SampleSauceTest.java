@@ -173,8 +173,7 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
     /*
      * @return the {@link SauceOnDemandAuthentication} instance containing the Sauce username/access key
      */
-    @Override
-    public SauceOnDemandAuthentication getAuthentication() {
+    @Override public SauceOnDemandAuthentication getAuthentication() {
         return authentication;
     }
 
