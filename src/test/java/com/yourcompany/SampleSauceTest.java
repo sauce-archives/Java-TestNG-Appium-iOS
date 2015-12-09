@@ -67,8 +67,8 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
     @DataProvider(name = "hardCodedBrowsers", parallel = true)
     public static Object[][] sauceBrowserDataProvider(Method testMethod) {
         return new Object[][]{
-            new Object[]{"iOS", "iPhone 6", "8.4", "", "portrait", "1.4.11", testMethod.getName()},
-            new Object[]{"iOS", "iPhone 6 Plus", "8.4", "", "portrait", "1.4.12", testMethod.getName()}
+            new Object[]{"iOS", "iPhone 6", "8.4", "", "portrait", "1.4.16", testMethod.getName()},
+            new Object[]{"iOS", "iPhone 6 Plus", "8.4", "", "portrait", "1.4.16", testMethod.getName()}
         };
     }
 
