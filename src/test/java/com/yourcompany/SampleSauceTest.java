@@ -8,6 +8,7 @@ import com.saucelabs.testng.SauceOnDemandTestListener;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.internal.Streams;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.*;
@@ -104,9 +105,10 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
             capabilities.setCapability("build", this.buildName);
         }
 
+        String sauceURI = getSauceURI();
         webDriver.set(new IOSDriver<WebElement>(
                 new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() +
-                        "@ondemand.saucelabs.com:80/wd/hub"), capabilities));
+                        sauceURI), capabilities));
         String id = ((RemoteWebDriver) getWebDriver()).getSessionId().toString();
         sessionId.set(id);
         return webDriver.get();
@@ -207,6 +209,19 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
             this.appURI = String.format(fileURI, fileName);
             System.out.printf("File: %s uploaded successfully!\n", this.appFile);
         }
+    }
+
+    private static String getSauceURI(){
+        //If SC plugin is running in our CI environment this env var will be set.
+        String sePort = System.getenv("SELENIUM_PORT");
+        String sauceURI = "@%:%s/wd/hub";
+        if (sePort != null){
+            sauceURI = String.format(sauceURI, "localhost", sePort);
+        } else {
+            //direct connection to Sauce
+            sauceURI = String.format(sauceURI, "ondemand.saucelabs.com", "80");
+        }
+        return sauceURI;
     }
 
 }
