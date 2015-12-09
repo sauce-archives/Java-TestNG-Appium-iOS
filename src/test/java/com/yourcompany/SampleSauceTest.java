@@ -8,10 +8,12 @@ import com.saucelabs.testng.SauceOnDemandTestListener;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.internal.Streams;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testng.annotations.*;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
 
 import static org.testng.Assert.assertEquals;
 
@@ -79,7 +81,6 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
      * @param platformName Represents the platform to be run.
      * @param deviceName Represents the device to be tested on
      * @param platformVersion Version Represents version of the platform.
-     * @param app Represents the location of the app under test.
      * @param browserName browser name
      * @param deviceOrientation device orientation during test.
      * @param appiumVersion appium version to be used
@@ -149,7 +150,7 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
         // is sum equal?
         String sum = driver.findElementsByClassName("UIAStaticText").get(0).getText();
         assertEquals(Integer.parseInt(sum), 20);
-    	
+
         driver.quit();
     }
 
