@@ -87,7 +87,7 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
         capabilities.setCapability("name", "Java-TestNG-Appium-iOS");
 
         webDriver.set(new IOSDriver<WebElement>(
-                new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
+                new URL("https://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:443/wd/hub"),
                 capabilities));
         String id = ((RemoteWebDriver) getWebDriver()).getSessionId().toString();
         sessionId.set(id);
@@ -112,7 +112,7 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
     @Test(dataProvider = "hardCodedBrowsers")
     public void addSumTest(String platformName, String deviceName, String platformVersion, String app, String browserName, String deviceOrientation, String appiumVersion) throws Exception {
     	IOSDriver<WebElement> driver = createDriver(platformName, deviceName, platformVersion, app, browserName, deviceOrientation, appiumVersion);
-    	    
+
         MobileElement fieldOne = (MobileElement) driver.findElementByAccessibilityId("TextField1");
         fieldOne.sendKeys("12");
 
@@ -125,7 +125,7 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
         // is sum equal?
         String sum = driver.findElementsByClassName("UIAStaticText").get(0).getText();
         assertEquals(Integer.parseInt(sum), 20);
-    	
+
         driver.quit();
     }
 
