@@ -12,6 +12,7 @@ import io.appium.java_client.AppiumDriver;
 import com.saucelabs.testng.SauceOnDemandTestListener;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -71,7 +72,7 @@ public class TestBase implements SauceOnDemandSessionIdProvider, SauceOnDemandAu
      * @return the {@link iosDriver} for the current thread
      */
     public IOSDriver getiosDriver() {
-        return IOSDriver.get();
+        return iosDriver.get();
     }
 
     /**
@@ -109,7 +110,8 @@ public class TestBase implements SauceOnDemandSessionIdProvider, SauceOnDemandAu
             String deviceName,
             String platformVersion,
             String appiumVersion,
-            String deviceOrientation)
+            String deviceOrientation,
+            String methodName)
             throws MalformedURLException, UnexpectedException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
@@ -118,6 +120,7 @@ public class TestBase implements SauceOnDemandSessionIdProvider, SauceOnDemandAu
         capabilities.setCapability("deviceName", deviceName);
         capabilities.setCapability("deviceOrientation", deviceOrientation);
         capabilities.setCapability("appiumVersion", appiumVersion);
+        capabilities.setCapability("name", methodName);
 
         String app = "https://github.com/saucelabs-sample-test-frameworks/Java-Junit-Appium-iOS/blob/master/resources/SauceGuineaPig-sim-debug.app.zip?raw=true";
 
@@ -132,7 +135,8 @@ public class TestBase implements SauceOnDemandSessionIdProvider, SauceOnDemandAu
                 new URL("https://" + authentication.getUsername() + ":" + authentication.getAccessKey() + seleniumURI +"/wd/hub"),
                 capabilities));
 
-        this.sessionId = iosDriver.getSessionId().toString();
+        String id = ((RemoteWebDriver) getiosDriver()).getSessionId().toString();
+        sessionId.set(id);
     }
 
     /**
